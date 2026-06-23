@@ -254,9 +254,10 @@ function setupLetterPage() {
   audio.volume = 0.7;
 
   function startMusic() {
+    audio.currentTime = 10; // skip 10 detik intro fade-in
     audio.play().catch(() => {
       // Browser blokir autoplay — mainkan saat user pertama kali sentuh/klik
-      const onGesture = () => audio.play();
+      const onGesture = () => { audio.currentTime = 10; audio.play(); };
       document.addEventListener('click',      onGesture, { once: true });
       document.addEventListener('touchstart', onGesture, { once: true });
     });
